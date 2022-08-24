@@ -1,20 +1,26 @@
+/*
+ * @Author: 月魂
+ * @Date: 2022-08-22 17:05:43
+ * @LastEditTime: 2022-08-24 16:11:01
+ * @LastEditors: 月魂
+ * @Description: 
+ * @FilePath: \vue-admin\src\router\index.js
+ */
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Layout from '@/layout'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard.vue'),
+      meta: { title: 'Dashboard', icon: 'Odometer' }
+    }]
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
 ]
 
 const router = createRouter({
